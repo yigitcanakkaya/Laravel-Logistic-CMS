@@ -1,0 +1,13 @@
+# Redirect everything to public folder
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_URI} !^/public
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Block sensitive folders
+    RewriteRule ^(vendor|storage|app|bootstrap|config|database|resources|routes|tests)(.*)$ - [F,L]
+
+    # Block sensitive files
+    RewriteRule ^(.env|artisan|composer.*|package.*|phpunit.*|webpack.*)$ - [F,L]
+</IfModule>
